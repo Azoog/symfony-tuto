@@ -24,7 +24,7 @@ class AdvertSkill
   private $level;
 
   /**
-   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert")
+   * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Advert",inversedBy="skills")
    * @ORM\JoinColumn(nullable=false)
    */
   private $advert;
