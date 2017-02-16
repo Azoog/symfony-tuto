@@ -262,4 +262,14 @@ class AdvertController extends Controller
 
     return $this->render('OCPlatformBundle:Advert:delete.html.twig');
   }
+  
+  public function purgeAction($days) {
+      //on charge le service
+      $purgeService = $this->container->get('oc_platform.purger.advert');
+      
+      //on lance la purge
+      $purgeService->purger($days);
+
+      return $this->redirectToRoute('oc_platform_home');
+  }
 }

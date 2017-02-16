@@ -55,6 +55,19 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
         
     }
     
+    public function getAdvertsXDaysAgo($days) {
+        $qb = $this->createQueryBuilder('a')
+                   ->where('a.updatedAt <= :datesub')
+                   ->orWhere('a.updatedAt IS NULL AND a.date <= :datesub')
+                   ->andwhere('a.applications IS EMPTY')
+                   ->setParameter('datesub', new \Datetime($days.' days ago'));
+        
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
     public function myFind()
     {
       $qb = $this->createQueryBuilder('a');
